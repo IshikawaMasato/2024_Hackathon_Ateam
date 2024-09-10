@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
+            $table->string('tag_name');
+            $table->boolean('delete_flag')->default(false);
             $table->timestamps();
         });
     }
