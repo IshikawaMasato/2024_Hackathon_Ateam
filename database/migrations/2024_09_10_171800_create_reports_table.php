@@ -9,11 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('report');
+            $table->unsignedBigInteger('user_id');
+            $table->string('img_path')->nullable();
+            $table->boolean('delete_flag')->default(false);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
