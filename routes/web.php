@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\mypagecontroller;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +16,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/mypage', [mypagecontroller::class, 'mypage']);
+    Route::get('/post',[postcontroller::class,'post']);
+    Route::get('/editpost',[editpostcontroller::class,'editpost']);
+    Route::get('/viewpost',[viewpostcontroller::class,'viewpost']);
+    Route::get('/follow',[followcontroller::class,'follow']);
+    Route::get('/accountdelete',[accountdeletecontroller::class,'accountdelete']);
+    Route::get('/registration',[registrationcontroller::class,'registration']);
 });
 
 require __DIR__.'/auth.php';
+
