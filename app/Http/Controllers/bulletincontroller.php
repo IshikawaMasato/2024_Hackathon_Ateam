@@ -4,18 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\tags;
+
 
 class bulletincontroller extends Controller
 {
-    public function post(Request $request)
+    public function bulletin(Request $request)
     {
-        // ディレクトリ名を任意の名前で設定します
-        $dir = 'img';
-
-        // imgディレクトリを作成し画像を保存
-        // storage/app/public/任意のディレクトリ名/
-        $request->file('image')->post('public/' . $dir);
-        return view('bulletin');
+        // カテゴリーの一覧取得
+        $categorys = category::where('delete_flag', 0)->get();
+        return view('components/bulletin',$image);
     }
 }
 

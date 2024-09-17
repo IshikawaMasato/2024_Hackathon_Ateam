@@ -12,13 +12,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/bulletin',[bulletincontroller::class,'bulletin']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/mypage', [mypagecontroller::class, 'mypage']);
-    Route::get('/bulletin',[bulletincontroller::class,'bulletin']);
     Route::get('/editpost',[editpostcontroller::class,'editpost']);
     Route::get('/viewpost',[viewpostcontroller::class,'viewpost']);
     Route::get('/follow',[followcontroller::class,'follow']);
