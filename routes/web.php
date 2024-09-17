@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\mypagecontroller;
-
+use App\Http\Controllers\bulletincontroller;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,7 +18,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/mypage', [mypagecontroller::class, 'mypage']);
-    Route::get('/post',[postcontroller::class,'post']);
+    Route::get('/bulletin',[bulletincontroller::class,'bulletin']);
     Route::get('/editpost',[editpostcontroller::class,'editpost']);
     Route::get('/viewpost',[viewpostcontroller::class,'viewpost']);
     Route::get('/follow',[followcontroller::class,'follow']);
