@@ -13,6 +13,7 @@ class bulletincontroller extends Controller
     {
         // カテゴリーの一覧取得
         $categorys = category::where('delete_flag', 0)->get();
+        
         return view('components/bulletin',$image);
     }
 }
