@@ -10,6 +10,7 @@ Route::get('/', function () {
 });
 
 Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
+Route::get('/search',[viewpostController::class,'search']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
