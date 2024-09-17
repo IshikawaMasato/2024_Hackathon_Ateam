@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\reports;
 class viewpostcontroller extends Controller
 {
-    public function viewpost(Request $request)
+    public function viewpost()
     {
-        $items = Person::all();
-        return view('viewpost');
+        $items = reports::all();
+        // var_dump($items);
+        return view('viewpost',['items'=> $items]);
+
+    }
+    public function search(Request $request)
+    {
+
     }
 }
 
