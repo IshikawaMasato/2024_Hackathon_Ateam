@@ -3,10 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\mypagecontroller;
+use App\Http\Controllers\viewpostcontroller;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
+Route::get('/search',[viewpostController::class,'search']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -22,8 +26,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/editpost',[editpostcontroller::class,'editpost']);
     Route::get('/viewpost',[viewpostcontroller::class,'viewpost']);
     Route::get('/follow',[followcontroller::class,'follow']);
-    Route::get('/accountdelete',[accountdeletecontroller::class,'accountdelete']);
-    Route::get('/registration',[registrationcontroller::class,'registration']);
 });
 
 require __DIR__.'/auth.php';
