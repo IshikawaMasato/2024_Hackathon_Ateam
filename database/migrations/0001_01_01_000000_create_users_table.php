@@ -22,12 +22,9 @@ return new class extends Migration
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('password_reset_token');
-            $table->timestamp('created_at')->useCurrent();
-            $table->datetime('expires_at');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('email')->primary();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
 
         Schema::create('sessions', function (Blueprint $table) {
