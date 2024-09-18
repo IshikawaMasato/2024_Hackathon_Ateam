@@ -14,7 +14,7 @@ class viewpostcontroller extends Controller
         // カテゴリーの一覧取得
         $categorys= tags::where('delete_flag',0)->get();
 
-        $items = reports::all();
+        $items = reports::where('delete_flag',0)->get();
         return view('viewpost',['items'=>$items,'categorys'=>$categorys]);
     }
 
@@ -48,6 +48,13 @@ class viewpostcontroller extends Controller
         
         //一覧画面へ
         return view('viewpost',['items'=>$items,'categorys'=>$categorys]);
+    }
+
+    public function delete($id)
+    {
+        $reports = reports::find($id);
+        $reports->update(['delete_flag' => 1]);
+        return redirect('viewpost');
     }
 }
 
