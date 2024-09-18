@@ -12,14 +12,15 @@ Route::get('/', function () {
 
 Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
 Route::get('/search',[viewpostController::class,'search']);
-Route::post('/viewpost',[viewpostController::class,'viewpost']);
 Route::get('/delete/{id}',[viewpostController::class,'delete'])->name('delete');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/bulletin',[bulletincontroller::class,'bulletin']);
+Route::get('/', [bulletincontroller::class, 'index'])->name('reports.index');
+Route::get('/bulletin', [bulletincontroller::class, 'bulletin'])->name('reports.bulletin');
+Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,10 +28,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/mypage', [mypagecontroller::class, 'mypage']);
-    Route::get('/editpost',[editpostcontroller::class,'editpost']);
-    Route::get('/viewpost',[viewpostcontroller::class,'viewpost']);
-    Route::get('/follow',[followcontroller::class,'follow']);
+    Route::get('/editpost', [editpostcontroller::class, 'editpost']);
+    Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
+    Route::get('/follow', [followcontroller::class, 'follow']);
 });
 
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';

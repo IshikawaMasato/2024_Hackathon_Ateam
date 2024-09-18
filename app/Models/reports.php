@@ -9,8 +9,13 @@ use App\Models\category;
 class reports extends Model
 {
     use HasFactory;
+    protected $table = 'reports';
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
 }
 
+    protected $fillable = [
+        'img_path',
+    ];
+}
 
