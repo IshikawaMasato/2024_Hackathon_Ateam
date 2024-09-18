@@ -9,6 +9,8 @@ use App\Models\category;
 class reports extends Model
 {
     use HasFactory;
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
 }
 
 
