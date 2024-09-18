@@ -12,6 +12,8 @@ Route::get('/', function () {
 
 Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
 Route::get('/search',[viewpostController::class,'search']);
+Route::post('/viewpost',[viewpostController::class,'viewpost']);
+Route::get('/delete/{id}',[viewpostController::class,'delete'])->name('delete');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
