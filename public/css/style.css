@@ -2,7 +2,6 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
     height: 100%;
     justify-content: center;
     align-items: center;
@@ -11,37 +10,46 @@ body {
 .post-container {
     width: 100%;
     background-color: #fff;
-    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+input[type="text"]{
+    height: 10%;
+    margin-top: 18px;
+    margin-left: 40%;
+    }
 .profile-section {
     display: flex;
-    align-items: center;
-    margin: 0 auto;
 }
 
+.title{
+    height: 50%;
+    display: block;
+}
+.profile{
+    margin: 0.5% 0% 0% 5%;
+}
 .profile-icon {
     width: 50px;
     height: 50px;
     background-color: #ccc;
     border-radius: 50%;
-    margin-left: 14%;
-    margin-top: 5%;
+    margin: 1% 1% 1% 20%;
 }
-
+h1{
+    margin: 0;
+    padding: 3%;
+}
 .profile-info {
     text-align: left;
     display: flex;
     padding: 20px;
-    margin: 6% 20% 2% 0;
     width: 333px;
 }
 
 .profile-info span {
     display: block;
-    margin: 0 5% 0 0;
 }
 
 .post-text {
