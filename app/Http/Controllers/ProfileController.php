@@ -20,17 +20,32 @@ class ProfileController extends Controller
     }
 
 
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request)
     {
-        $request->user()->fill($request->validated());
+        $user = Auth::user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // バリデーション
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+            'img_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像のバリデーション
+        ]);
+
+        // 画像がアップロードされた場合
+        if ($request->hasFile('img_path')) {
+            // 画像の保存
+            $path = $request->file('img_path')->store('profiles', 'public');
+            $user->img_path = $path;
         }
 
-        $request->user()->save();
+        // 他のアカウント情報の更新
+        $user->name = $request->name;
+        $user->email = $request->email;
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // 保存
+        $user->save();
+
+        return redirect()->route('profile.edit')->with('status', 'profile-updated');
     }
 
 
