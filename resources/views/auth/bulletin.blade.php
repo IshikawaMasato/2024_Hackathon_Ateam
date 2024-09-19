@@ -11,6 +11,7 @@
 <body>
     <div class="body">
         <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="post-container">
                 <div class="flex">
                     <div class="flex flex2">
@@ -21,19 +22,18 @@
                 <div class="profile-section">
                     <div class="profile-icon"></div>
                     <div class="profile-info">
-                        <span>アカウント名</span>
+                        <span class="profile">アカウント名</span>
                         <span class="profile">2024/XX/XX</span>
                     </div>
 
                 </div>
                 <div class="title">
-                    <input type="text" placeholder="タイトル">
+                    <input type="text" name="title" placeholder="タイトル">
                 </div>
-                <textarea class="post-text"></textarea>
+                <textarea class="post-text" name="textarea" required></textarea>
                 <div class="flex">
                     <div class="upload-section">
-                        <input for="imageUpload" type="file" class="upload">
-                        <input type="file" id="imageUpload" style="display: none" />
+                        <input for="imageUpload" type="file" class="upload" name="img_path">
                         <div class="image-preview"></div>
                     </div>
                     <div class="tag-section">
