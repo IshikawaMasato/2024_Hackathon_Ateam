@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\mypagecontroller;
 use App\Http\Controllers\bulletincontroller;
 use App\Http\Controllers\viewpostcontroller;
+use App\Http\Controllers\PostController;
 
 //最初のアクセス
 Route::get('/', function () {
@@ -15,8 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
-Route::get('/search',[viewpostController::class,'search']);
-Route::get('/delete/{id}',[viewpostController::class,'delete'])->name('delete');
+Route::get('/search', [viewpostController::class, 'search']);
+Route::get('/delete/{id}', [viewpostController::class, 'delete'])->name('delete');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -39,6 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/editpost', [editpostcontroller::class, 'editpost']);
     Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
     Route::get('/follow', [followcontroller::class, 'follow']);
+
+    // 投稿関連ルート
+
 });
 
 require __DIR__ . '/auth.php';

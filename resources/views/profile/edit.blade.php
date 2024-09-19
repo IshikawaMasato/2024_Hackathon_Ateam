@@ -14,8 +14,8 @@
             </div>
 
             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.post')
+                <div class="">
+                    @include('profile.partials.report') <!-- ここで report.php を呼び出しています -->
                 </div>
             </div>
 
