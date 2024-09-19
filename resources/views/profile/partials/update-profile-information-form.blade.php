@@ -8,15 +8,15 @@
     <div class="flex mt-10 mb-28 max-w-full">
         <!-- Profile image section -->
         <div class="flex flex-col items-center w-1/2 justify-center">
-            <img src="{{ asset('storage/'.Auth::user()->img_path) }}" alt="Profile Image" class="w-40 h-40 rounded-full border border-gray-300 dark:border-gray-700">
+            <img src="{{ asset('storage/'.Auth::user()->img_path) }}" alt="Profile Image" class=" w-60 h-60 object-cover rounded-full border border-gray-300 dark:border-gray-700">
             <!-- Moved Image upload form into the main form below -->
-            <label for="img_path" class="cursor-pointer flex items-center mt-4">
+            <!-- <label for="img_path" class="cursor-pointer flex items-center mt-4">
                 <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v16h16V4H4zM4 8h16M8 4v16m8-12l-4 4m0 0l-4-4m4 4V4"></path>
                 </svg>
                 <span class="text-sm">{{ __('ファイルをアップロード') }}</span>
                 <input id="img_path" type="file" name="img_path" class="hidden" accept="image/*">
-            </label>
+            </label> -->
         </div>
         <!-- Account information section -->
         <div class="flex-1">
@@ -46,4 +46,5 @@
             </form>
         </div>
     </div>
+    
 </section>
