@@ -23,9 +23,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // アクセスされているか確認して実行する
-Route::get('/', [bulletincontroller::class, 'index'])->name('reports.index');
+// Route::get('/', [bulletincontroller::class, 'index'])->name('reports.index');
 Route::get('/bulletin', [bulletincontroller::class, 'bulletin'])->name('reports.bulletin');
 Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store');
+
 
 Route::middleware('auth')->group(function () {
     // プロフィールのページにアクセスしたとき、ProfileControllerを呼び出す
