@@ -13,9 +13,3 @@ class reports extends Model
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
 }
-
-    protected $fillable = [
-        'img_path',
-    ];
-}
-
