@@ -1,0 +1,19 @@
+img{
+    width: 500px;
+    height: 500px;
+}
+.view{
+    margin-left: 600px;
+}
+.search{
+    height: 50px;
+}
+.keyword{
+    margin-left: 10px;
+}
+.follow{
+    display: flex;
+}
+button{
+    height: 30px;
+}
