@@ -9,7 +9,7 @@ use App\Models\reports;
 use App\Models\tags;
 use App\Models\report_tag;
 
-class bulletincontroller extends Controller
+class editbulletincontroller extends Controller
 {
     public function index()
     {
@@ -17,12 +17,12 @@ class bulletincontroller extends Controller
         return view('auth.index', compact('reports'));
     }
 
-    public function bulletin(Request $request)
+    public function editbulletin(Request $request)
     {
         // カテゴリーの一覧取得
         $categorys = tags::where('delete_flag', 0)->get();
 
-        return view('auth.bulletin', ['categorys' => $categorys]);
+        return view('auth.editbulletin', ['categorys' => $categorys]);
     }
 
     // public function store(Request $request)
