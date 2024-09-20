@@ -17,7 +17,7 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         // Postモデルからすべての投稿を取得
-        $posts = reports::all();
+        $posts = reports::where('delete_flag',0)->get();
 
         // user と posts を view に渡す
         return view('profile.edit', [
