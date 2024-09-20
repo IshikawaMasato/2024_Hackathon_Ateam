@@ -27,11 +27,17 @@
                     </div>
 
                 </div>
-                <div class="title">
-                    <input type="text" name="title" placeholder="タイトル">
+                <div class="picture_frame">
+                    <div class="surround">
+                        <div class="title">
+                            <input type="text" class="input_title" name="title" placeholder="タイトル">
+                        </div>
+                        <div class="input_message">
+                            <textarea class="post-text" name="textarea" placeholder="　私たちは今とても無事です" required></textarea>
+                        </div>
+                    </div>
                 </div>
-                <textarea class="post-text" name="textarea" required></textarea>
-                <div class="flex">
+                <div class="flex_section">
                     <div class="upload-section">
                         <input for="imageUpload" type="file" class="upload" name="img_path">
                         <div class="image-preview"></div>
@@ -48,8 +54,8 @@
                     </div>
                 </div>
                 <div class="button-section">
-                    <button class="back-button">戻る</button>
-                    <button class="submit-button">投稿</button>
+                    <button class="back-button button">戻る</button>
+                    <button class="submit-button button">投稿</button>
                 </div>
             </div>
         </form>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\reports;
 use App\Models\tags;
+use App\Models\report_tag;
 
 class bulletincontroller extends Controller
 {
@@ -44,15 +45,21 @@ class bulletincontroller extends Controller
             $imgPath = basename($path);
         } else {
             $imgPath = null; // 画像がない場合の処理
+            $report = reports::create([
+                'title' => $request->input('title'),
+                'report' => $request->input('textarea'), // フォームからのtextareaをreportとして保存
+                'user_id' => $user->id, // ログイン中のユーザーのIDを設定
+                'img_path' => $imgPath,
+                'category' => $request->input('category'),
+            ]);
+
+            $tag = $request->input('category');
+            report_tag::create([
+                'report_id'=> $report->id,
+                'tag_id'=>$tag,
+            ]);
+
+            return redirect('/');
         }
-        // データを作成
-        reports::create([
-            'title' => $request->input('title'),
-            'report' => $request->input('textarea'), // フォームからのtextareaをreportとして保存
-            'user_id' => $user->id, // ログイン中のユーザーのIDを設定
-            'img_path' => $imgPath,
-            'category' => $request->input('category'),
-        ]);
-        return redirect('/');
     }
 }
