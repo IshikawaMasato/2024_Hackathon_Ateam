@@ -13,6 +13,10 @@ Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
 Route::get('/search',[viewpostController::class,'search']);
 Route::post('/viewpost',[viewpostController::class,'viewpost']);
 Route::get('/delete/{id}',[viewpostController::class,'delete'])->name('delete');
+Route::get('/follow/{id}',[viewpostController::class,'follow'])->name('follow');
+Route::get('/delete_follow/{id}',[viewpostController::class,'delete_follow'])->name('delete_follow');
+Route::get('/reactions/{id}',[viewpostController::class,'reactions'])->name('reactions');
+Route::get('/delete_reactions/{id}',[viewpostController::class,'delete_reactions'])->name('delete_reactions');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
