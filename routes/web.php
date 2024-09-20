@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\mypagecontroller;
 use App\Http\Controllers\bulletincontroller;
+use App\Http\Controllers\editbulletincontroller;
 use App\Http\Controllers\viewpostcontroller;
 use App\Http\Controllers\PostController;
 
@@ -27,6 +28,8 @@ Route::get('/dashboard', function () {
 
 // Route::get('/', [bulletincontroller::class, 'index'])->name('reports.index');
 Route::get('/bulletin', [bulletincontroller::class, 'bulletin'])->name('reports.bulletin');
+Route::get('/editbulletin', [editbulletincontroller::class, 'editbulletin'])->name('reports.editbulletin');
+Route::post('/store', [editbulletincontroller::class, 'store'])->name('reports.store');
 Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store');
 
 // 投稿削除用のルート
