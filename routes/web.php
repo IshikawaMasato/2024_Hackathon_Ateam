@@ -42,6 +42,17 @@ Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store
 // 投稿削除用のルート
 Route::get('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 
+// フォロー・フォロワー数表示
+Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.edit');
+
+
+// フォロー数表示のページ遷移
+Route::get('/profile/follow/{userId}', [ProfileController::class, 'followPage'])->name('profile.follow');
+
+// フォロワー数表示のページ遷移
+Route::get('/profile/follower/{userId}', [ProfileController::class, 'followerPage'])->name('profile.follower');
+
+
 // アクセスされているか確認して実行する
 Route::middleware('auth')->group(function () {
     
