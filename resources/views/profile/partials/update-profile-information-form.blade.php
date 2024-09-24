@@ -17,6 +17,9 @@
                 <span class="text-sm">{{ __('ファイルをアップロード') }}</span>
                 <input id="img_path" type="file" name="img_path" class="hidden" accept="image/*">
             </label> -->
+            <div>
+                
+            </div>
         </div>
         <!-- Account information section -->
         <div class="flex-1">
