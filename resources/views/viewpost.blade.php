@@ -7,7 +7,7 @@
 <form action="/search" class="search">
     @csrf
     <input type="text" name="keyword" value="検索" class="keyword">
-    <select name="category" class="keyword">
+    <select name="tag" class="keyword">
         <option value="0">全て</option>
         @foreach($categorys as $category)
             <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
@@ -16,10 +16,18 @@
     <input type="datetime-local" name="created_at" class="keyword">
     <input type="submit" value="検索" class="keyword">
 </form>
+<div>
+    @if(isset($result))
+        @foreach($result as $data)
+            <p>{{$data->report->title}}</p>
+        @endforeach
+    @endif
+</div>
+
 @foreach($items as $item)
 <div class="item">
 <p>アカウント名</p>
-<input type="date" class="date"></input>
+<p class="data">{{$item -> created_at}}</p>
 <div class="button">
 <a href="{{ route('follow',['id' => $item->id])}}" id="follow">フォロー</a>
 <a href="{{ route('delete_follow',['id' => $item->id])}}" >フォロー削除</a>
@@ -27,6 +35,11 @@
 </div>
 <p>{{$item -> title }}</p>
 <p>{{$item -> report }}</p>
+<p>ここにタグがでるよ:
+    @foreach($item -> tag as $tag)
+    {{$tag -> tag_name}}
+    @endforeach
+</p>
 <div>
     <img src="{{ asset('storage/app/public/'.$item->img_path)}}" alt="test画像">
 </div>
