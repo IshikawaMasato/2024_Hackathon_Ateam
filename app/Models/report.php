@@ -6,10 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\category;
 
-class reports extends Model
+class report extends Model
 {
     use HasFactory;
     protected $table = 'reports';
     protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function comments()
+    {
+        return $this->hasMany(comments::class);
+    }
 }

@@ -33,6 +33,12 @@
 <a href="{{ route('reactions',['id' => $item->id])}}">いいね!</a>
 <a href="{{ route('delete_reactions',['id' => $item->id])}}">いいね削除</a>
 
+@foreach( $item->comments as $comment)
+    <p>これがコメント{{$comment -> comment}}</p>
+@endforeach
+
+
+
 <a href="{{ route('delete', ['id' => $item->id]) }}">削除</a>
 <div class="border"></div>
 @endforeach

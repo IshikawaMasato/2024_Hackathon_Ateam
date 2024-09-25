@@ -25,6 +25,7 @@ Route::get('/follow/{id}',[viewpostController::class,'follow'])->name('follow');
 Route::get('/delete_follow/{id}',[viewpostController::class,'delete_follow'])->name('delete_follow');
 Route::get('/reactions/{id}',[viewpostController::class,'reactions'])->name('reactions');
 Route::get('/delete_reactions/{id}',[viewpostController::class,'delete_reactions'])->name('delete_reactions');
+Route::get('/comments/{id}',[viewpostController::class,'comments'])->name('comments');
 
 
 Route::get('/dashboard', function () {

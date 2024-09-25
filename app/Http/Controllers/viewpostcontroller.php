@@ -5,19 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\reports;
+use App\Models\report;
 use App\Models\tags;
 use App\Models\follows;
 use App\Models\reactions;
+use App\Models\comments;
 
 class viewpostcontroller extends Controller
 {
     public function viewpost()
     {
         // カテゴリーの一覧取得
-        $categorys= tags::where('delete_flag',0)->get();
+        $categorys = tags::where('delete_flag',0)->get();
+        $items = report::where('delete_flag',0)->get();
 
-        $items = reports::where('delete_flag',0)->get();
         return view('viewpost',['items'=>$items,'categorys'=>$categorys]);
     }
 
@@ -27,7 +28,7 @@ class viewpostcontroller extends Controller
         $categorys= tags::where('delete_flag',0)->get();
         
         //$queryに検索文を作成
-        $query=reports::where('delete_flag',0);//公開中のデータのみ
+        $query=report::where('delete_flag',0);//公開中のデータのみ
         
             // キーワードがあったら検索文に含める
         if($request->keyword){
@@ -55,7 +56,7 @@ class viewpostcontroller extends Controller
 
     public function delete($id)
     {
-        $reports = reports::find($id);
+        $reports = report::find($id);
         $reports->update(['delete_flag' => 1]);
         return redirect('viewpost');
     }
@@ -101,6 +102,15 @@ class viewpostcontroller extends Controller
         ]);
         $reactions->update(['reaction_flag' => 1]);
         return redirect('viewpost');
+    }
+
+    public function comments()
+    {
+        // カテゴリーの一覧取得
+        $categorys = tags::where('delete_flag',0)->get();
+        $items = report::where('delete_flag',0)->get();
+
+        return view('viewpost',['items'=>$items,'categorys'=>$categorys]);
     }
 }
 
