@@ -8,7 +8,7 @@
     <div class="flex mt-10 mb-28 max-w-full">
         <!-- Profile image section -->
         <div class="flex flex-col items-center w-1/2 justify-center">
-            <img src="{{ asset('storage/' . Auth::user()->img_path) }}" alt="Profile Image"
+            <img src="{{ asset('storage/' . Auth::user()->img_path) }}" alt=""
                 class=" w-60 h-60 object-cover rounded-full border border-gray-300 dark:border-gray-700">
             <!-- Moved Image upload form into the main form below -->
             <!-- <label for="img_path" class="cursor-pointer flex items-center mt-4">
@@ -28,7 +28,8 @@
                     @endforeach
                 @else
                     <!-- もし0人だったときの表示 -->
-                    <a href="{{ route('profile.follow', ['userId' => $follow->followed_id = 0])}}">
+                    {{-- <!-- href="{{ route('profile.follow', ['userId' => $follow->followed_id = 0])}}" --> --}}
+                    <a>
                         0<span class="text-gray-500 ml-3 ">フォロー中</span>
                     </a>
                 @endif
@@ -40,7 +41,8 @@
                         </a>
                     @endforeach
                 @else
-                    <a href="{{ route('profile.follower', ['userId' => $follower->follower_id = 0]) }}">
+                    {{-- <!--  href="{{ route('profile.follower', ['userId' => $follower->follower_id = 0]) }}" --> --}}
+                    <a>
                         0<span class="text-gray-500 ml-3">フォロワー</span>
                     </a>
                 @endif
