@@ -52,6 +52,10 @@ Route::get('/profile/follow/{userId}', [ProfileController::class, 'followPage'])
 // フォロワー数表示のページ遷移
 Route::get('/profile/follower/{userId}', [ProfileController::class, 'followerPage'])->name('profile.follower');
 
+// 他ユーザーの表示
+Route::get('/profile/{userId}', [ProfileController::class, 'show'])->name('profile.show');
+
+
 
 // アクセスされているか確認して実行する
 Route::middleware('auth')->group(function () {
