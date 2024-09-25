@@ -9,12 +9,12 @@
     <div class="w-4/5 max-h-96 mt-6 mx-auto border border-black overflow-y-scroll">
 
         @if($followers->isNotEmpty())
-            @foreach($followers as $follower)
-                <a href="{{ route('profile.edit', ['userId' => $follower->id]) }}">
+            @foreach($followers as $user)
+                <a href="{{ route('profile.show', ['userId' => $user->id]) }}">
                     <div class="max-w-full h-50 mt-2 overflow-hidden border-b border-black">
-                        <img src="{{ asset('storage/' . $follower->img_path) }}" alt="Profile Image"
+                        <img src="{{ asset('storage/' . $user->img_path) }}" alt="Profile Image"
                             class="w-10 h-10 object-cover rounded-full">
-                        <p>{{ $follower->name }}</p>
+                        <p>{{ $user->name }}</p>
                     </div>
                 </a>
             @endforeach
