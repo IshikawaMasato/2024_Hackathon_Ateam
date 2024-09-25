@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Post; // Postモデルをインポート
 use App\Models\Follower;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -19,16 +20,16 @@ class ProfileController extends Controller
     {
         // 現在ログインしているユーザーIDを取得
         $userId = Auth::id();
-    
+
         // フォロワーデータを取得
         $followers = Follower::where('followed_id', $userId)->get();
-    
+
         // フォロー中のデータを取得 (follower_idが現在のユーザーをフォローしているユーザーIDを取得)
         $follows = Follower::where('follower_id', $userId)->get();
-    
+
         // Postモデルからすべての投稿を取得
         $posts = reports::where('delete_flag', 0)->get();
-    
+
         // user, posts, followers, followsをviewに渡す
         return view('profile.edit', [
             'user' => $request->user(),
@@ -37,7 +38,7 @@ class ProfileController extends Controller
             'follows' => $follows, // フォローしているデータをビューに渡す
         ]);
     }
-    
+
 
     // public function edit(Request $request): View
     // {
@@ -128,25 +129,39 @@ class ProfileController extends Controller
     // フォロー数を表す
     public function followPage($userId)
     {
-        // フォロー中のユーザーのIDを取得
+        // フォロー中のユーザーIDを取得
         $followingIds = Follower::where('follower_id', $userId)->pluck('followed_id');
 
-        // フォロー中のユーザー情報を取得
-        $follows = reports::whereIn('id', $followingIds)->get(); // Userモデルで取得
+        // フォロー中のユーザー情報を取得 (Userモデルを使用)
+        $follows = User::whereIn('id', $followingIds)->get();
 
-        // フォローしているユーザー情報をビューに渡す
         return view('profile.follow', compact('follows'));
     }
+
     public function followerPage($userId)
     {
-        // フォロワーのIDを取得（0件の場合も考慮）
+        // フォロワーのIDを取得
         $followerIds = Follower::where('followed_id', $userId)->pluck('follower_id');
 
         // フォロワーのユーザー情報を取得
-        $followers = reports::whereIn('id', $followerIds)->get();
+        $followers = User::whereIn('id', $followerIds)->get();
 
-        // フォロワー情報をビューに渡す（0件でも表示可能）
         return view('profile.follower', compact('followers'));
+    }
+
+
+    // 他ユーザーの情報取得したいな
+    public function show($userId)
+    {
+        // ユーザ情報を取得
+        $user = User::findOrFail($userId);
+
+        // フォローとフォロワー情報も取得
+        $follows = $user->follows;
+        $followers = $user->followers;
+        $posts = $user->posts; // 投稿情報も取得する場合
+
+        return view('profile.otherUser', compact('user', 'follows', 'followers', 'posts'));
     }
 
 }
