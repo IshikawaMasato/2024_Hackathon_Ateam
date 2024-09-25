@@ -8,7 +8,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Category;
 use Illuminate\View\View;
+
 use App\Models\Post; // Postモデルをインポート
 use App\Models\Follower;
 
@@ -28,6 +30,8 @@ class ProfileController extends Controller
     
         // Postモデルからすべての投稿を取得
         $posts = reports::where('delete_flag', 0)->get();
+
+        // user と posts を view に渡す
     
         // user, posts, followers, followsをviewに渡す
         return view('profile.edit', [
@@ -36,6 +40,10 @@ class ProfileController extends Controller
             'followers' => $followers,
             'follows' => $follows, // フォローしているデータをビューに渡す
         ]);
+    }
+    public function editbulletin()
+    {
+        return view('auth.editbulletin');
     }
     
 

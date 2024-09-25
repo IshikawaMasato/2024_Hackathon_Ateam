@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>防災情報投稿</title>
+    <title>防災情報投稿編集</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
@@ -15,7 +15,7 @@
             <div class="post-container">
                 <div class="flex">
                     <div class="flex flex2">
-                        <h1>防災情報投稿編集</h1>
+                        <h1>防災情報投稿</h1>
                         <img src="{{ asset('img/icon.png') }}" class="icon" alt="">
                     </div>
                 </div>
@@ -45,9 +45,11 @@
                     <div class="tag-section">
                         <select name="category">
                             <option value="0">全て</option>
-                            @foreach($categorys as $category)
-                            <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
-                            @endforeach
+                            @if(isset($category))
+                                @foreach($categorys as $category)
+                                <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
+                                @endforeach
+                            @endif
                         </select>
                         <button class="tag-button">＋</button>
                         <button class="tag-button2">－</button>

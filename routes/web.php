@@ -43,9 +43,10 @@ Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store
 // 投稿削除用のルート
 Route::get('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 
+// ProfileController
+Route::get('/auth/editbulletin',[ProfileController::class,'editbulletin'])->name('auth.editbulletin');
 // フォロー・フォロワー数表示
 Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.edit');
-
 
 // フォロー数表示のページ遷移
 Route::get('/profile/follow/{userId}', [ProfileController::class, 'followPage'])->name('profile.follow');
@@ -63,6 +64,7 @@ Route::middleware('auth')->group(function () {
     //     // 'profile.partials.report' というパスでビューを指定
     //     return view('profile.partials.report', compact('posts'));
     // })->name('report');
+    Route::get('/editbulletin', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
 
     // プロフィールのページにアクセスしたとき、ProfileControllerを呼び出す
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
