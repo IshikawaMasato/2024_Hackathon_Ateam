@@ -8,7 +8,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Category;
 use Illuminate\View\View;
+
 use App\Models\Post; // Postモデルをインポート
 
 class ProfileController extends Controller
@@ -17,13 +19,17 @@ class ProfileController extends Controller
     public function edit(Request $request): View
     {
         // Postモデルからすべての投稿を取得
-        $posts = reports::where('delete_flag',0)->get();
+        $posts = reports::where('delete_flag', 0)->get();
 
         // user と posts を view に渡す
         return view('profile.edit', [
             'user' => $request->user(),
             'posts' => $posts,
         ]);
+    }
+    public function editbulletin()
+    {
+        return view('auth.editbulletin');
     }
 
 
@@ -81,7 +87,7 @@ class ProfileController extends Controller
             'img_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $user = Auth::user();
-        
+
         // 新しい画像を保存
         $path = $request->file('img_path')->store('profile_images', 'public');
         $user->img_path = $path;

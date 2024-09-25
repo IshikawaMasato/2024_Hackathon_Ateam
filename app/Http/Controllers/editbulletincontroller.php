@@ -20,9 +20,10 @@ class editbulletincontroller extends Controller
     public function editbulletin(Request $request)
     {
         // カテゴリーの一覧取得
+        // カテゴリーの一覧取得
         $categorys = tags::where('delete_flag', 0)->get();
 
-        return view('auth.editbulletin', ['categorys' => $categorys]);
+        return view('editbulletin',['categorys'=>$categorys]);
     }
 
     // public function store(Request $request)
