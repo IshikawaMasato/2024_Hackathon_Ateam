@@ -17,8 +17,16 @@ Route::get('/', function () {
 });
 
 Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
-Route::get('/search', [viewpostController::class, 'search']);
-Route::get('/delete/{id}', [viewpostController::class, 'delete'])->name('delete');
+
+Route::get('/search',[viewpostController::class,'search']);
+Route::post('/viewpost',[viewpostController::class,'viewpost']);
+Route::get('/delete/{id}',[viewpostController::class,'delete'])->name('delete');
+Route::get('/follow/{id}',[viewpostController::class,'follow'])->name('follow');
+Route::get('/delete_follow/{id}',[viewpostController::class,'delete_follow'])->name('delete_follow');
+Route::get('/reactions/{id}',[viewpostController::class,'reactions'])->name('reactions');
+Route::get('/delete_reactions/{id}',[viewpostController::class,'delete_reactions'])->name('delete_reactions');
+Route::get('/comments/{id}',[viewpostController::class,'comments'])->name('comments');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -37,6 +45,15 @@ Route::get('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destr
 
 // ProfileController
 Route::get('/auth/editbulletin',[ProfileController::class,'editbulletin'])->name('auth.editbulletin');
+// フォロー・フォロワー数表示
+Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.edit');
+
+// フォロー数表示のページ遷移
+Route::get('/profile/follow/{userId}', [ProfileController::class, 'followPage'])->name('profile.follow');
+
+// フォロワー数表示のページ遷移
+Route::get('/profile/follower/{userId}', [ProfileController::class, 'followerPage'])->name('profile.follower');
+
 
 // アクセスされているか確認して実行する
 Route::middleware('auth')->group(function () {

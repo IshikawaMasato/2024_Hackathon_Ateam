@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="{{ asset('css/viewpost.css') }}">
 
 <h1>防災情報閲覧</h1>
+<div class="box">
+<div class="information"></div>
 <div class="view">
 <form action="/search" class="search">
     @csrf
@@ -15,17 +17,32 @@
     <input type="submit" value="検索" class="keyword">
 </form>
 @foreach($items as $item)
-<div class="follow">
+<div class="item">
 <p>アカウント名</p>
-<button>フォロー</button>
+<input type="date" class="date"></input>
+<div class="button">
+<a href="{{ route('follow',['id' => $item->id])}}" id="follow">フォロー</a>
+<a href="{{ route('delete_follow',['id' => $item->id])}}" >フォロー削除</a>
+</div>
 </div>
 <p>{{$item -> title }}</p>
 <p>{{$item -> report }}</p>
-
 <div>
     <img src="{{ asset('storage/app/public/'.$item->img_path)}}" alt="test画像">
 </div>
+<a href="{{ route('reactions',['id' => $item->id])}}">いいね!</a>
+<a href="{{ route('delete_reactions',['id' => $item->id])}}">いいね削除</a>
+
+@foreach( $item->comments as $comment)
+    <p>これがコメント{{$comment -> comment}}</p>
+@endforeach
+
+
 
 <a href="{{ route('delete', ['id' => $item->id]) }}">削除</a>
+<div class="border"></div>
 @endforeach
+</div>
+
+
 </div>
