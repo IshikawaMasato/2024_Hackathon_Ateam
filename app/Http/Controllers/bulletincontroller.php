@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\reports;
+use App\Models\report;
 use App\Models\tag;
 use App\Models\report_tag;
-use App\Models\tag;
 
 class bulletincontroller extends Controller
 {
