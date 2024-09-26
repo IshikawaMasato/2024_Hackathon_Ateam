@@ -19,16 +19,18 @@ img{
 }
 #follow{
     height: 30px;
-    margin-top: 10px;
-    margin-left: 300px;
+    margin-left: 250px;
+}
+.button{
+    margin-top: 15px;
 }
 .border{
     border-bottom: 1px solid #000000;
     width: 600px;
 }
-.date{
+.data{
     height: 30px;
-    margin-top: 10px;
+    margin-top: 15px;
     margin-left: 30px;
 }
 

@@ -16,4 +16,14 @@ class report extends Model
     {
         return $this->hasMany(comments::class);
     }
+
+    public function report_tag()
+    {
+        return $this->hasMany(report_tag::class);
+    }
+
+    public function tag()
+    {
+        return $this->belongsToMany(tag::class,'report_tags','report_id','tag_id');
+    }
 }

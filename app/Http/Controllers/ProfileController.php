@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\follows;
 use App\Models\report;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -139,26 +140,55 @@ class ProfileController extends Controller
 
 
     // フォロー数を表す
-    public function followPage($userId)
+    public function followPage()
     {
+        // ログイン中のユーザーのIDを取得
+        $userId = Auth::user()->id;
+
         // フォロー中のユーザーのIDを取得
-        $followingIds = Follower::where('follower_id', $userId)->pluck('followed_id');
+        $followingIds = Follower::where('follower_id', $userId)
+            ->where('delete_flag', 0) // 削除されていないもののみ取得
+            ->pluck('followed_id');
 
         // フォロー中のユーザー情報を取得
         $follows = report::whereIn('id', $followingIds)->get(); // Userモデルで取得
-
-        // フォローしているユーザー情報をビューに渡す
+        $follows = User::whereIn('id', $followingIds)->get();
         return view('profile.follow', compact('follows'));
     }
-    public function followerPage($userId)
+
+
+    // フォロワー
+    public function followerPage()
     {
-        // フォロワーのIDを取得（0件の場合も考慮）
-        $followerIds = Follower::where('followed_id', $userId)->pluck('follower_id');
+        // ログイン中のユーザーのIDを取得
+        $userId = Auth::user()->id;
+
+        // フォロワーのユーザーのIDを取得
+        $followerIds = Follower::where('followed_id', $userId)
+            ->where('delete_flag', 0) // 削除されていないもののみ取得
+            ->pluck('follower_id');
 
         // フォロワーのユーザー情報を取得
         $followers = report::whereIn('id', $followerIds)->get();
+        $followers = User::whereIn('id', $followerIds)->get();
 
-        // フォロワー情報をビューに渡す（0件でも表示可能）
         return view('profile.follower', compact('followers'));
+    }
+
+   
+    
+    // 他ユーザーの情報を取得し、表示する
+    public function show($userId)
+    {
+        // 指定されたユーザ情報を取得
+        $user = User::findOrFail($userId);
+
+        // フォロー・フォロワー・投稿情報を取得
+        $follows = $user->follows;
+        $followers = $user->followers;
+        $posts = $user->posts;
+
+        // otherUserビューにデータを渡して表示
+        return view('profile.otherUser', compact('user', 'follows', 'followers', 'posts'));
     }
 }

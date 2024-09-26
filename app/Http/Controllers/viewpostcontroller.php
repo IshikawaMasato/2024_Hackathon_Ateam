@@ -6,18 +6,19 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\report;
-use App\Models\tags;
+use App\Models\tag;
 use App\Models\follows;
 use App\Models\reactions;
 use App\Models\comments;
+use App\Models\report_tag;
 
 class viewpostcontroller extends Controller
 {
     public function viewpost()
     {
         // カテゴリーの一覧取得
-        $categorys = tags::where('delete_flag',0)->get();
-        $items = report::where('delete_flag',0)->get();
+        $categorys = tag::where('delete_flag',0)->get();
+        $items = report::with('tag')->where('delete_flag',0)->get();
 
         return view('viewpost',['items'=>$items,'categorys'=>$categorys]);
     }
@@ -26,6 +27,9 @@ class viewpostcontroller extends Controller
     {
         // カテゴリーの一覧取得
         $categorys= tags::where('delete_flag',0)->get();
+
+        //カテゴリーとタグの中間テーブルから検索
+        $report_tags = report_tag::where('delete_flag',0)->get();
         
         //$queryに検索文を作成
         $query=report::where('delete_flag',0);//公開中のデータのみ
@@ -33,13 +37,14 @@ class viewpostcontroller extends Controller
             // キーワードがあったら検索文に含める
         if($request->keyword){
             //keywordが入力されていたら検索
-            $query->where('name','LIKE',"%{$request->keyword}%");
+            $query->where('title','LIKE',"%{$request->keyword}%");
         }
         
         // カテゴリが選択されていたら検索文に含める
-        if($request->category!=0){
+        if($request->tag!=0){
             //カテゴリが選択されていたら検索
-            $query->where('category_id',$request->category);
+            $query = report_tag::where('tag_id',$request->tag);
+            
         }
 
         // 作成日が入力されていたら検索文に含める
