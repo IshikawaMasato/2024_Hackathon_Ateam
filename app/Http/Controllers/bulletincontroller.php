@@ -42,14 +42,15 @@ class bulletincontroller extends Controller
         // 画像がアップロードされた場合のパスを取得
         if ($img) {
             $path = $img->store('public');
-            $imgPath = basename($path); $report = report::create([
+            $imgPath = basename($path);
+            $report = report::create([
                 'title' => $request->input('title'),
                 'report' => $request->input('textarea'), // フォームからのtextareaをreportとして保存
                 'user_id' => $user->id, // ログイン中のユーザーのIDを設定
                 'img_path' => $imgPath,
                 'category' => $request->input('category'),
             ]);
-            
+
             return redirect('/');
         } else {
             $imgPath = null; // 画像がない場合の処理
@@ -65,6 +66,8 @@ class bulletincontroller extends Controller
                 'report_id' => $report->id,
                 'tag_id' => $tag,
             ]);
+
+            return redirect('/');
         }
     }
 }
