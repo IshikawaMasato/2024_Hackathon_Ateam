@@ -10,7 +10,7 @@
 
 <body>
 
-    <div class="body">
+    <div>
         <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
@@ -40,13 +40,11 @@
                     </div>
                     <div class="tag-section">
                         <select name="category">
-                            <option value="0">全て</option>
+                            <option value="0">タグを選択してください</option>
                             @foreach($categorys as $category)
                             <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
                             @endforeach
                         </select>
-                        <button class="tag-button">＋</button>
-                        <button class="tag-button2">－</button>
                     </div>
                 </div>
                 <div class="button-section">

@@ -19,46 +19,37 @@
                         <img src="{{ asset('img/icon.png') }}" class="icon" alt="">
                     </div>
                 </div>
-                <div class="profile-section">
-                    <div class="profile-icon"></div>
-                    <div class="profile-info">
-                        <span class="profile">アカウント名</span>
-                        <span class="profile">2024/XX/XX</span>
+            </div>
+            <div class="picture_frame">
+                <div class="surround">
+                    <div class="title">
+                        <input type="text" class="input_title" name="title" placeholder="タイトル">
                     </div>
-
-                </div>
-                <div class="picture_frame">
-                    <div class="surround">
-                        <div class="title">
-                            <input type="text" class="input_title" name="title" placeholder="タイトル">
-                        </div>
-                        <div class="input_message">
-                            <textarea class="post-text" name="textarea" placeholder="　私たちは今とても無事です" required></textarea>
-                        </div>
+                    <div class="input_message">
+                        <textarea class="post-text" name="textarea" placeholder="　私たちは今とても無事です" required></textarea>
                     </div>
-                </div>
-                <div class="flex_section">
-                    <div class="upload-section">
-                        <input for="imageUpload" type="file" class="upload" name="img_path">
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="tag-section">
-                        <select name="category">
-                            <option value="0">全て</option>
-                            @foreach($categorys as $category)
-                                <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
-                            @endforeach
-                        </select>
-                        <button class="tag-button">＋</button>
-                        <button class="tag-button2">－</button>
-                    </div>
-                </div>
-                <div class="button-section">
-                    <button class="back-button button">戻る</button>
-                    <button class="submit-button button">投稿</button>
                 </div>
             </div>
-        </form>
+            <div class="flex_section">
+                <div class="upload-section">
+                    <input for="imageUpload" type="file" class="upload" name="img_path">
+                    <div class="image-preview"></div>
+                </div>
+                <div class="tag-section">
+                    <select name="category">
+                        <option value="0">タグを選択してください</option>
+                        @foreach($categorys as $category)
+                        <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <div class="button-section">
+                <button class="back-button button">戻る</button>
+                <button class="submit-button button">投稿</button>
+            </div>
+    </div>
+    </form>
     </div>
 </body>
 

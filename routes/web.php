@@ -40,7 +40,6 @@ Route::get('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destr
 // ProfileController
 
 Route::get('/auth/editbulletin/{id}', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
-Route::get('/auth/editbulletin', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
 // フォロー・フォロワー数表示
 Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.edit');
 
@@ -73,7 +72,6 @@ Route::middleware('auth')->group(function () {
     //     // 'profile.partials.report' というパスでビューを指定
     //     return view('profile.partials.report', compact('posts'));
     // })->name('report');
-    // Route::get('/editbulletin', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
 
     // プロフィールのページにアクセスしたとき、ProfileControllerを呼び出す
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
