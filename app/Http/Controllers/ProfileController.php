@@ -54,27 +54,7 @@ class ProfileController extends Controller
         return view('auth.editbulletin', ["posts"=>$posts,"users"=>$users,'categorys' => $categorys]);
     }
 
-    // public function edit(Request $request): View
-    // {
-
-    //     // 現在ログインしているユーザーIDを取得
-    //     $userId = Auth::id();
-
-    //     // フォロワーデータを取得
-    //     $followers = Follower::where('followed_id', $userId)->get();
-
-    //     // Postモデルからすべての投稿を取得
-    //     $posts = reports::where('delete_flag', 0)->get();
-
-    //     // user と posts を view に渡す
-    //     return view('profile.edit', [
-    //         'user' => $request->user(),
-    //         'posts' => $posts,
-    //         'followers' => $followers, // フォロワーデータをビューに渡す
-
-    //     ]);
-    // }
-
+    
 
     public function update(Request $request)
     {
