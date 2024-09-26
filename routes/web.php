@@ -11,12 +11,7 @@ use App\Http\Controllers\editbulletincontroller;
 use App\Http\Controllers\viewpostcontroller;
 use App\Http\Controllers\PostController;
 
-//最初のアクセス
-Route::get('/', function () {
-    return view('./welcome');
-});
-
-Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
+Route::get('/', [viewpostcontroller::class, 'viewpost']);
 
 Route::get('/search', [viewpostController::class, 'search']);
 Route::post('/viewpost', [viewpostController::class, 'viewpost']);
@@ -28,7 +23,7 @@ Route::get('/delete_reactions/{id}', [viewpostController::class, 'delete_reactio
 Route::get('/comments/{id}', [viewpostController::class, 'comments'])->name('comments');
 
 
-Route::get('/dashboard', function () {
+@Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
