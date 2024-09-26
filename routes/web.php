@@ -89,7 +89,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/mypage', [mypagecontroller::class, 'mypage']);
     Route::get('/editpost', [editpostcontroller::class, 'editpost']);
     Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
-    Route::get('/follow', [followcontroller::class, 'follow']);
+    Route::get('/follow/{id}', [followcontroller::class, 'follow']);
 
 
 
