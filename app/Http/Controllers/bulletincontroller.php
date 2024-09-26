@@ -18,6 +18,15 @@ class bulletincontroller extends Controller
         return view('auth.index', compact('reports'));
     }
 
+    public function auth()
+    {
+        // メソッドの処理をここに記述
+        // カテゴリーの一覧取得
+        $categorys = tag::where('delete_flag', 0)->get();
+
+        return view('auth.bulletin', ['categorys' => $categorys]);
+    }
+
     public function bulletin(Request $request)
     {
         // カテゴリーの一覧取得
@@ -25,7 +34,6 @@ class bulletincontroller extends Controller
 
         return view('auth.bulletin', ['categorys' => $categorys]);
     }
-
     // public function store(Request $request)
     // {
     //     $img = $request->file('img_path');
