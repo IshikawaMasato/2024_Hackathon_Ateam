@@ -77,10 +77,15 @@ class viewpostcontroller extends Controller
         //すでにフォロー関係が存在するか確認
         $existingfollow = follows::where('follower_id',$user_id)->first();
 
+        //$user_idと$idでデータが存在するか確認
+       
+        //あればリダイレクト
+        //なければ↓の処理
         $follows = follows::create([
             'follower_id'=>$id,
             'followed_id'=>$user_id
         ]);
+
         return redirect('viewpost');
     }
     
