@@ -25,7 +25,6 @@ Route::get('/dashboard', function () {
 
 Route::get('/bulletin/auth', [BulletinController::class, 'auth'])->name('bulletin.auth');
 Route::get('/bulletin', [bulletincontroller::class, 'bulletin'])->name('reports.bulletin');
-Route::post('/store', [editbulletincontroller::class, 'store'])->name('reports.store');
 Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store');
 
 Route::get('/auth/editbulletin/{id}', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
