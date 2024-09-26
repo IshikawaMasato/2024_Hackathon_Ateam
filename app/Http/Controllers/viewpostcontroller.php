@@ -96,6 +96,7 @@ class viewpostcontroller extends Controller
         'follower_id'=>$user_id,
         'followed_id'=>$id
         ]);
+
         if($follows) {
             //  フォロー関係を物理的に削除
             $follows->delete();
@@ -107,21 +108,36 @@ class viewpostcontroller extends Controller
     public function reactions($id)
     {
         $user_id = Auth::id();
+        $userToreaction = User::find($id);
+        if(!$userToreaction){
+            return redirect()->back()->with('error','ユーザーが見つかりません。');
+        }
+
+        $existingreaction = reactions::where('user_id',$user_id)->where('report_id',$id)->first();
+
         $reactions = reactions::create([
-            'user_id'=>$id,
-            'report_id'=>$user_id,
+            'user_id'=>$user_id,
+            'report_id'=>$id,
             'reaction_flag'=> 0
         ]);
+        
         return redirect('viewpost');
     }
     
     public function delete_reactions($id)
     {
         $user_id = Auth::id();
+        //リアクション関係を確認
         $reactions = reactions::where([
         'user_id'=>$id,
         'report_id'=>$user_id
         ]);
+
+        if($reactions) {
+            //  リアクション関係を物理的に削除
+            $reactions->delete();
+        }
+        
         $reactions->update(['reaction_flag' => 1]);
         return redirect('viewpost');
     }
