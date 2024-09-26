@@ -4,6 +4,7 @@
     </header>
 
     
+
     <div class="w-4/5 max-h-96 mt-6 mx-auto border border-black overflow-y-scroll">
         @if ($posts->isEmpty())
             <p class="text-center my-5">現在は投稿がありません</p>
@@ -32,12 +33,11 @@
                         <a href="{{ route('posts.destroy', ['id' => $post->id]) }}"
                             class="mr-6 mb-3 px-3 py-1 border border-black rounded-lg bg-red-600 text-white cursor-pointer hover:opacity-80">削除</a>
                     </div>
+
                 </div>
             @endforeach
         @endif
     </div>
-
-    
 </section>
 <script>
     document.addEventListener("DOMContentLoaded", function() {

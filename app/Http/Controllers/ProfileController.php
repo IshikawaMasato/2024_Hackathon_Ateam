@@ -18,6 +18,7 @@ use App\Models\tag;
 use App\Models\User;
 use App\Models\users;
 
+
 class ProfileController extends Controller
 {
 
@@ -33,6 +34,7 @@ class ProfileController extends Controller
         $follows = Follower::where('follower_id', $userId)->get();
 
         // Postモデルからすべての投稿を取得
+
         $posts = report::where('delete_flag', 0)->get();
 
         // user と posts を view に渡す
@@ -149,6 +151,7 @@ class ProfileController extends Controller
 
         // フォロワーのユーザー情報を取得
         $followers = report::whereIn('id', $followerIds)->get();
+
         $followers = User::whereIn('id', $followerIds)->get();
 
         return view('profile.follower', compact('followers'));
@@ -168,4 +171,5 @@ class ProfileController extends Controller
         // otherUserビューにデータを渡して表示
         return view('profile.otherUser', compact('user', 'follows', 'followers', 'posts'));
     }
+
 }

@@ -5,7 +5,6 @@
             {{ $user->name }} {{ __('のマイページ') }}
         </h2>
     </header>
-
     <!-- Profile image section -->
     <div class="flex mt-10 mb-28 max-w-full">
         <div class="flex flex-col items-center w-1/2 justify-center">
