@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\reports;
+use App\Models\report;
 use App\Models\tags;
 use App\Models\report_tag;
 
@@ -13,18 +13,11 @@ class editbulletincontroller extends Controller
 {
     public function index()
     {
-        $reports = reports::get();
+        $reports = report::get();
         return view('auth.index', compact('reports'));
     }
 
-    public function editbulletin(Request $request)
-    {
-        // カテゴリーの一覧取得
-        // カテゴリーの一覧取得
-        $categorys = tags::where('delete_flag', 0)->get();
 
-        return view('editbulletin',['categorys'=>$categorys]);
-    }
 
     // public function store(Request $request)
     // {
@@ -46,7 +39,7 @@ class editbulletincontroller extends Controller
             $imgPath = basename($path);
         } else {
             $imgPath = null; // 画像がない場合の処理
-            $report = reports::create([
+            $report = report::create([
                 'title' => $request->input('title'),
                 'report' => $request->input('textarea'), // フォームからのtextareaをreportとして保存
                 'user_id' => $user->id, // ログイン中のユーザーのIDを設定

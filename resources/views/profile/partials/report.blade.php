@@ -32,7 +32,7 @@
 
 
                     <div class="max-w-full mr-2 ml-auto flex justify-end">
-                        <a href="{{ route('auth.editbulletin') }}"
+                        <a href="{{ route('auth.editbulletin',['id'=>$post->id]) }}"
                             class="mr-6 mb-3 px-3 py-1 border border-black rounded-lg bg-slate-300 cursor-pointer hover:opacity-80">編集</a>
                         <a href="{{ route('posts.destroy', ['id' => $post->id]) }}"
                             class="mr-6 mb-3 px-3 py-1 border border-black rounded-lg bg-red-600 text-white cursor-pointer hover:opacity-80">削除</a>

@@ -9,12 +9,13 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Category;
+use App\Models\tags;
 use Illuminate\View\View;
 
 use App\Models\Post; // Postモデルをインポート
 use App\Models\Follower;
 use App\Models\User;
+use App\Models\users;
 
 class ProfileController extends Controller
 {
@@ -43,11 +44,14 @@ class ProfileController extends Controller
             'follows' => $follows, // フォローしているデータをビューに渡す
         ]);
     }
-    public function editbulletin()
+    public function editbulletin($id)
     {
-        return view('auth.editbulletin');
+        // カテゴリーの一覧取得
+        $categorys = tags::where('delete_flag', 0)->get();
+        $posts = report::where("id",$id)->get();
+        $users = User::where("id",$id)->get();
+        return view('auth.editbulletin', ["posts"=>$posts,"users"=>$users,'categorys' => $categorys]);
     }
-
 
     // public function edit(Request $request): View
     // {
@@ -147,8 +151,8 @@ class ProfileController extends Controller
             ->pluck('followed_id');
 
         // フォロー中のユーザー情報を取得
+        $follows = report::whereIn('id', $followingIds)->get(); // Userモデルで取得
         $follows = User::whereIn('id', $followingIds)->get();
-
         return view('profile.follow', compact('follows'));
     }
 
@@ -165,6 +169,7 @@ class ProfileController extends Controller
             ->pluck('follower_id');
 
         // フォロワーのユーザー情報を取得
+        $followers = report::whereIn('id', $followerIds)->get();
         $followers = User::whereIn('id', $followerIds)->get();
 
         return view('profile.follower', compact('followers'));
@@ -186,5 +191,4 @@ class ProfileController extends Controller
         // otherUserビューにデータを渡して表示
         return view('profile.otherUser', compact('user', 'follows', 'followers', 'posts'));
     }
-
 }

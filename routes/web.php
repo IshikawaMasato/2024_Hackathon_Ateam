@@ -36,7 +36,6 @@ Route::get('/dashboard', function () {
 
 // Route::get('/', [bulletincontroller::class, 'index'])->name('reports.index');
 Route::get('/bulletin', [bulletincontroller::class, 'bulletin'])->name('reports.bulletin');
-Route::get('/editbulletin', [editbulletincontroller::class, 'editbulletin'])->name('reports.editbulletin');
 Route::post('/store', [editbulletincontroller::class, 'store'])->name('reports.store');
 Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store');
 
@@ -44,6 +43,8 @@ Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store
 Route::get('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 // ProfileController
+
+Route::get('/auth/editbulletin/{id}', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
 Route::get('/auth/editbulletin', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
 // フォロー・フォロワー数表示
 Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.edit');
@@ -77,7 +78,7 @@ Route::middleware('auth')->group(function () {
     //     // 'profile.partials.report' というパスでビューを指定
     //     return view('profile.partials.report', compact('posts'));
     // })->name('report');
-    Route::get('/editbulletin', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
+    // Route::get('/editbulletin', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
 
     // プロフィールのページにアクセスしたとき、ProfileControllerを呼び出す
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

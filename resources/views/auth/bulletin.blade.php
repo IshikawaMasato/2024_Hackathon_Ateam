@@ -46,7 +46,7 @@
                         <select name="category">
                             <option value="0">全て</option>
                             @foreach($categorys as $category)
-                            <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
                             @endforeach
                         </select>
                         <button class="tag-button">＋</button>
