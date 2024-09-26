@@ -4,37 +4,33 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>防災情報投稿</title>
+    <title>防災情報投稿編集</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body>
-    <div class="body">
+
+    <div>
         <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+
             <div class="post-container">
                 <div class="flex">
                     <div class="flex flex2">
-                        <h1>防災情報投稿編集</h1>
+                        <h1>防災情報投稿</h1>
                         <img src="{{ asset('img/icon.png') }}" class="icon" alt="">
                     </div>
                 </div>
-                <div class="profile-section">
-                    <div class="profile-icon"></div>
-                    <div class="profile-info">
-                        <span class="profile">アカウント名</span>
-                        <span class="profile">2024/XX/XX</span>
-                    </div>
-
-                </div>
+                @foreach ($posts as $post)
                 <div class="picture_frame">
                     <div class="surround">
                         <div class="title">
-                            <input type="text" class="input_title" name="title" placeholder="タイトル">
+                            <input type="text" class="input_title" name="title" placeholder="タイトル" value="{{ $post->title }}">
                         </div>
                         <div class="input_message">
-                            <textarea class="post-text" name="textarea" placeholder="　私たちは今とても無事です" required></textarea>
+                            <textarea class="post-text" name="report" placeholder="　私たちは今とても無事です" required>{{ $post->report }}</textarea>
                         </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="flex_section">
@@ -44,13 +40,11 @@
                     </div>
                     <div class="tag-section">
                         <select name="category">
-                            <option value="0">全て</option>
+                            <option value="0">タグを選択してください</option>
                             @foreach($categorys as $category)
                             <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
                             @endforeach
                         </select>
-                        <button class="tag-button">＋</button>
-                        <button class="tag-button2">－</button>
                     </div>
                 </div>
                 <div class="button-section">
@@ -60,6 +54,7 @@
             </div>
         </form>
     </div>
+
 </body>
 
 </html>

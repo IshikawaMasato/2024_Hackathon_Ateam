@@ -10,4 +10,9 @@ class report_tag extends Model
     use HasFactory;
     protected $table = 'report_tag';
     protected $fillable = ['report_id', 'tag_id'];
+
+    public function report()
+    {
+        return $this->belongsTo(report::class);
+    }
 }

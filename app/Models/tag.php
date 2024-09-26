@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\category;
 
-class reports extends Model
+class tag extends Model
 {
     use HasFactory;
-    protected $table = 'reports';
-    protected $guarded = ['id', 'created_at', 'updated_at'];
 
+    public function report()
+    {
+        return $this->belongsToMany(report::class,'report_tag','report_id','tag_id');
+    }
 }
