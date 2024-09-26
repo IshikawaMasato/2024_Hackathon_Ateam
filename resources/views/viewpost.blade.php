@@ -38,13 +38,8 @@
             </div>
             <p>{{$item->title}}</p>
             <p>{{$item->report}}</p>
-            <p>ここにタグがでるよ:
-                @foreach($item->tag as $tag)
-                    {{$tag->tag_name}}
-                @endforeach
-            </p>
             <div>
-                <img src="{{ asset('storage/app/public/'.$item->img_path) }}" alt="test画像">
+                <img src="{{ asset('storage/'.$item->img_path) }}" alt="test画像">
             </div>
             <a href="{{ route('reactions', ['id' => $item->id]) }}">いいね!</a>
             <a href="{{ route('delete_reactions', ['id' => $item->id]) }}">いいね削除</a>
