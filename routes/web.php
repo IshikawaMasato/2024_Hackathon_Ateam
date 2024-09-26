@@ -30,13 +30,14 @@ Route::get('/delete_reactions/{id}', [viewpostController::class, 'delete_reactio
 Route::get('/comments/{id}', [viewpostController::class, 'comments'])->name('comments');
 
 
-@Route::get('/dashboard', function () {
+Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 
 // Route::get('/', [bulletincontroller::class, 'index'])->name('reports.index');
+Route::get('/bulletin/auth', [BulletinController::class, 'auth'])->name('bulletin.auth');
 Route::get('/bulletin', [bulletincontroller::class, 'bulletin'])->name('reports.bulletin');
 Route::post('/store', [editbulletincontroller::class, 'store'])->name('reports.store');
 Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store');
@@ -79,6 +80,7 @@ Route::middleware('auth')->group(function () {
     //     // 'profile.partials.report' というパスでビューを指定
     //     return view('profile.partials.report', compact('posts'));
     // })->name('report');
+    // Route::get('/editbulletin', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
 
     // プロフィールのページにアクセスしたとき、ProfileControllerを呼び出す
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
