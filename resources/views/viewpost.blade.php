@@ -9,7 +9,7 @@
     <div class="view">
         <form action="/search" class="search">
             @csrf
-            <input type="text" name="keyword" value="検索" class="keyword">
+            <input type="text" name="keyword" placeholder="キーワードを入力" class="keyword">
             <select name="tag" class="keyword">
                 <option value="0">全て</option>
                 @foreach($categorys as $category)

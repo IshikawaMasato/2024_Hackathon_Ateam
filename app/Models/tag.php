@@ -9,6 +9,8 @@ class tag extends Model
 {
     use HasFactory;
 
+    protected $table = 'tags';
+
     public function report()
     {
         return $this->belongsToMany(report::class,'report_tag','report_id','tag_id');

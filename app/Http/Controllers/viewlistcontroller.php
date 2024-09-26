@@ -38,10 +38,10 @@ class viewlistcontroller extends Controller
         }
         
         // カテゴリが選択されていたら検索文に含める
-        if($request->tag!=0){
-            //カテゴリが選択されていたら検索
-            $query = report_tag::where('tag_id',$request->tag);
-            
+        if($request->tag != 0){
+            $query->whereHas('tag', function($q) use ($request) {
+                $q->where('tag_id', $request->tag);
+            });
         }
 
         // 作成日が入力されていたら検索文に含める
@@ -50,7 +50,7 @@ class viewlistcontroller extends Controller
         }
 
         // 検索文をもとにデータの取得
-        $items=$query->get();
+        $items = $query->with('tag')->get();
         
         //一覧画面へ
         return view('viewlist',['items'=>$items,'categorys'=>$categorys]);
