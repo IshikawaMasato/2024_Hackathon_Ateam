@@ -26,7 +26,7 @@ class viewpostcontroller extends Controller
     public function search(Request $request)
     {
         // カテゴリーの一覧取得
-        $categorys= tags::where('delete_flag',0)->get();
+        $categorys= tag::where('delete_flag',0)->get();
 
         //カテゴリーとタグの中間テーブルから検索
         $report_tags = report_tag::where('delete_flag',0)->get();
@@ -112,7 +112,7 @@ class viewpostcontroller extends Controller
     public function comments()
     {
         // カテゴリーの一覧取得
-        $categorys = tags::where('delete_flag',0)->get();
+        $categorys = tag::where('delete_flag',0)->get();
         $items = report::where('delete_flag',0)->get();
 
         return view('viewpost',['items'=>$items,'categorys'=>$categorys]);
