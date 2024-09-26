@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\reports;
 use App\Models\tag;
 use App\Models\report_tag;
+use App\Models\tag;
 
 class bulletincontroller extends Controller
 {
     public function index()
     {
-        $reports = reports::get();
+        $reports = report::get();
         return view('auth.index', compact('reports'));
     }
 
@@ -45,7 +46,7 @@ class bulletincontroller extends Controller
             $imgPath = basename($path);
         } else {
             $imgPath = null; // 画像がない場合の処理
-            $report = reports::create([
+            $report = report::create([
                 'title' => $request->input('title'),
                 'report' => $request->input('textarea'), // フォームからのtextareaをreportとして保存
                 'user_id' => $user->id, // ログイン中のユーザーのIDを設定

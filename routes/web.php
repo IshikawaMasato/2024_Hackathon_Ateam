@@ -20,17 +20,17 @@ Route::get('/', function () {
 Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
 Route::get('/viewlist', [viewlistcontroller::class, 'viewlist']);
 
-Route::get('/search',[viewpostController::class,'search']);
-Route::post('/viewpost',[viewpostController::class,'viewpost']);
-Route::get('/delete/{id}',[viewpostController::class,'delete'])->name('delete');
-Route::get('/follow/{id}',[viewpostController::class,'follow'])->name('follow');
-Route::get('/delete_follow/{id}',[viewpostController::class,'delete_follow'])->name('delete_follow');
-Route::get('/reactions/{id}',[viewpostController::class,'reactions'])->name('reactions');
-Route::get('/delete_reactions/{id}',[viewpostController::class,'delete_reactions'])->name('delete_reactions');
-Route::get('/comments/{id}',[viewpostController::class,'comments'])->name('comments');
+Route::get('/search', [viewpostController::class, 'search']);
+Route::post('/viewpost', [viewpostController::class, 'viewpost']);
+Route::get('/delete/{id}', [viewpostController::class, 'delete'])->name('delete');
+Route::get('/follow/{id}', [viewpostController::class, 'follow'])->name('follow');
+Route::get('/delete_follow/{id}', [viewpostController::class, 'delete_follow'])->name('delete_follow');
+Route::get('/reactions/{id}', [viewpostController::class, 'reactions'])->name('reactions');
+Route::get('/delete_reactions/{id}', [viewpostController::class, 'delete_reactions'])->name('delete_reactions');
+Route::get('/comments/{id}', [viewpostController::class, 'comments'])->name('comments');
 
 
-Route::get('/dashboard', function () {
+@Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -38,7 +38,6 @@ Route::get('/dashboard', function () {
 
 // Route::get('/', [bulletincontroller::class, 'index'])->name('reports.index');
 Route::get('/bulletin', [bulletincontroller::class, 'bulletin'])->name('reports.bulletin');
-Route::get('/editbulletin', [editbulletincontroller::class, 'editbulletin'])->name('reports.editbulletin');
 Route::post('/store', [editbulletincontroller::class, 'store'])->name('reports.store');
 Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store');
 
@@ -46,31 +45,40 @@ Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store
 Route::get('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 // ProfileController
-Route::get('/auth/editbulletin',[ProfileController::class,'editbulletin'])->name('auth.editbulletin');
+
+Route::get('/auth/editbulletin/{id}', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
 // フォロー・フォロワー数表示
 Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile.edit');
 
+
+
+// フォロー中のユーザーを表示するページ
+Route::get('/profile/follow', [ProfileController::class, 'followPage'])
+    ->name('profile.follow');
+
+// フォロワーの一覧を表示するページも同様に設定
+Route::get('/profile/follower', [ProfileController::class, 'followerPage'])
+    ->name('profile.follower');
+
+
 // フォロー数表示のページ遷移
-Route::get('/profile/follow/{userId}', [ProfileController::class, 'followPage'])->name('profile.follow');
+// Route::get('/profile/follow/{userId}', [ProfileController::class, 'followPage'])->name('profile.follow');
 
 // フォロワー数表示のページ遷移
-Route::get('/profile/follower/{userId}', [ProfileController::class, 'followerPage'])->name('profile.follower');
+// Route::get('/profile/follower', [ProfileController::class, 'followerPage'])->name('profile.follower');
 
 // 他ユーザーの表示
-Route::get('/profile/{userId}', [ProfileController::class, 'show'])->name('profile.show');
-
-
+Route::get('/profile/{userId}', [ProfileController::class, 'show'])->name('profile.otherUser');
 
 // アクセスされているか確認して実行する
 Route::middleware('auth')->group(function () {
-    
+
     // Route::get('/report', function () {
     //     // 全ての投稿を取得
     //     $posts = App\Models\Post::all();
     //     // 'profile.partials.report' というパスでビューを指定
     //     return view('profile.partials.report', compact('posts'));
     // })->name('report');
-    Route::get('/editbulletin', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
 
     // プロフィールのページにアクセスしたとき、ProfileControllerを呼び出す
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

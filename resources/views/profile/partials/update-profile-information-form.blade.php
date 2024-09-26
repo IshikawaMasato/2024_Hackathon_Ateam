@@ -10,45 +10,19 @@
         <div class="flex flex-col items-center w-1/2 justify-center">
             <img src="{{ asset('storage/' . Auth::user()->img_path) }}" alt=""
                 class=" w-60 h-60 object-cover rounded-full border border-gray-300 dark:border-gray-700">
-            <!-- Moved Image upload form into the main form below -->
-            <!-- <label for="img_path" class="cursor-pointer flex items-center mt-4">
-                <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v16h16V4H4zM4 8h16M8 4v16m8-12l-4 4m0 0l-4-4m4 4V4"></path>
-                </svg>
-                <span class="text-sm">{{ __('ファイルをアップロード') }}</span>
-                <input id="img_path" type="file" name="img_path" class="hidden" accept="image/*">
-            </label> -->
-
             <div class="flex mt-10  justify-items-end gap-4">
-                @if ($follows->isNotEmpty())
-                    @foreach($follows as $follow)
-                        <a href="{{ route('profile.follow', ['userId' => $follow->followed_id]) }}">
-                            {{ $follow->followed_id }}<span class="text-gray-500 ml-3 ">フォロー中</span>
-                        </a>
-                    @endforeach
-                @else
-                    <!-- もし0人だったときの表示 -->
-                    {{-- <!-- href="{{ route('profile.follow', ['userId' => $follow->followed_id = 0])}}" --> --}}
-                    <a>
-                        0<span class="text-gray-500 ml-3 ">フォロー中</span>
+                
+                @foreach($follows as $follow)
+                    <a href="{{ route('profile.follow', ['userId' => $follow->followed_id]) }}">
+                        {{ $follow->followed_id }}<span class="text-gray-500 ml-3 pointer-events-none">フォロー中</span>
                     </a>
-                @endif
+                @endforeach
 
-                @if($followers->isNotEmpty())
-                    @foreach($followers as $follower)
-                        <a href="{{ route('profile.follower', ['userId' => $follower->follower_id]) }}">
-                            {{ $follower->follower_id }}<span class="text-gray-500 ml-3">フォロワー</span>
-                        </a>
-                    @endforeach
-                @else
-                    {{-- <!--  href="{{ route('profile.follower', ['userId' => $follower->follower_id = 0]) }}" --> --}}
-                    <a>
-                        0<span class="text-gray-500 ml-3">フォロワー</span>
+                @foreach($followers as $follower)
+                    <a href="{{ route('profile.follower') }}">
+                        {{ $follower->follower_id }}<span class="text-gray-500 ml-3 pointer-events-none">フォロワー</span>
                     </a>
-                @endif
-
-
-
+                @endforeach
             </div>
 
         </div>
