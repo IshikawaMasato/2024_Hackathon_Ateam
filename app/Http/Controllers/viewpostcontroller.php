@@ -69,10 +69,16 @@ class viewpostcontroller extends Controller
     public function follow($id)
     {
         $user_id = Auth::id();
+        //$user_idと$idでデータが存在するか確認
+        $userToFollow = user::find($id);
+        if()
+        //あればリダイレクト
+        //なければ↓の処理
         $follows = follows::create([
             'follower_id'=>$id,
             'followed_id'=>$user_id
         ]);
+
         return redirect('viewpost');
     }
     
