@@ -10,51 +10,34 @@
 
 <body>
 
-    <div>
-        <form action="{{ route('reports.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+    <form action="{{ route('reports.update', $post->id) }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('POST')
 
-            <div class="post-container">
-                <div class="flex">
-                    <div class="flex flex2">
-                        <h1>防災情報投稿</h1>
-                        <img src="{{ asset('img/icon.png') }}" class="icon" alt="">
-                    </div>
-                </div>
-                @foreach ($posts as $post)
-                <div class="picture_frame">
-                    <div class="surround">
-                        <div class="title">
-                            <input type="text" class="input_title" name="title" placeholder="タイトル" value="{{ $post->title }}">
-                        </div>
-                        <div class="input_message">
-                            <textarea class="post-text" name="report" placeholder="　私たちは今とても無事です" required>{{ $post->report }}</textarea>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="flex_section">
-                    <div class="upload-section">
-                        <input for="imageUpload" type="file" class="upload" name="img_path">
-                        <div class="image-preview"></div>
-                    </div>
-                    <div class="tag-section">
-                        <select name="category">
-                            <option value="0">タグを選択してください</option>
-                            @foreach($categorys as $category)
-                            <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="button-section">
-                    <button class="back-button button">戻る</button>
-                    <button class="submit-button button">再投稿</button>
-                </div>
-            </div>
-        </form>
-    </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ old('title', $post->title) }}" required>
+        </div>
 
-</body>
+        <div class="form-group">
+            <label for="report">Report</label>
+            <textarea class="form-control" id="report" name="report" required>{{ old('report', $post->report) }}</textarea>
+        </div>
 
-</html>
+        <div class="form-group">
+            <label for="img_path">Image</label>
+            <input type="file" class="form-control" id="img_path" name="img_path">
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-control" id="category" name="category" required>
+                @foreach($categorys as $category)
+                    <option value="{{ $category->id }}">{{ $category->tag_name }}</option>
+                @endforeach 
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Report</button>
+    </form>
+</div>

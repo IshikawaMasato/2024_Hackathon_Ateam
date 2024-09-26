@@ -29,7 +29,7 @@ Route::get('/bulletin', [bulletincontroller::class, 'bulletin'])->name('reports.
 Route::post('/store', [bulletincontroller::class, 'store'])->name('reports.store');
 
 Route::get('/auth/editbulletin/{id}', [ProfileController::class, 'editbulletin'])->name('auth.editbulletin');
-
+Route::post('/reports/{id}', [ProfileController::class, 'update'])->name('reports.update');
 // アクセスされているか確認して実行する
 Route::middleware('auth')->group(function () {
 
