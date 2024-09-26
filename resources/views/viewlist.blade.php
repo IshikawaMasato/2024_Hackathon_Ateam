@@ -40,8 +40,6 @@
 <div>
     <img src="{{ asset('storage/app/public/'.$item->img_path)}}" alt="test画像">
 </div>
-
-<a href="{{ route('delete', ['id' => $item->id]) }}">削除</a>
 <div class="border"></div>
 @endforeach
 </div>

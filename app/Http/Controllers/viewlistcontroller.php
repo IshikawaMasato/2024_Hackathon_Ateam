@@ -17,7 +17,7 @@ class viewlistcontroller extends Controller
         $categorys = tag::where('delete_flag',0)->get();
         $items = report::with('tag')->where('delete_flag',0)->get();
 
-        return view('viewpost',['items'=>$items,'categorys'=>$categorys]);
+        return view('viewlist',['items'=>$items,'categorys'=>$categorys]);
     }
 
     public function search(Request $request)
@@ -53,14 +53,7 @@ class viewlistcontroller extends Controller
         $items=$query->get();
         
         //一覧画面へ
-        return view('viewpost',['items'=>$items,'categorys'=>$categorys]);
-    }
-
-    public function delete($id)
-    {
-        $reports = report::find($id);
-        $reports->update(['delete_flag' => 1]);
-        return redirect('viewpost');
+        return view('viewlist',['items'=>$items,'categorys'=>$categorys]);
     }
 
 }

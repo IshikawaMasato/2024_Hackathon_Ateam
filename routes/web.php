@@ -19,6 +19,7 @@ Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
 
 Route::get('/search', [viewpostController::class, 'search']);
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -67,7 +68,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/mypage', [mypagecontroller::class, 'mypage']);
     Route::get('/editpost', [editpostcontroller::class, 'editpost']);
     Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
-    
 
 });
 
