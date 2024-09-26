@@ -14,6 +14,7 @@ use Illuminate\View\View;
 
 use App\Models\Post; // Postモデルをインポート
 use App\Models\Follower;
+use App\Models\tag;
 use App\Models\User;
 use App\Models\users;
 
@@ -47,7 +48,7 @@ class ProfileController extends Controller
     public function editbulletin($id)
     {
         // カテゴリーの一覧取得
-        $categorys = tags::where('delete_flag', 0)->get();
+        $categorys = tag::where('delete_flag', 0)->get();
         $posts = report::where("id",$id)->get();
         $users = User::where("id",$id)->get();
         return view('auth.editbulletin', ["posts"=>$posts,"users"=>$users,'categorys' => $categorys]);
@@ -129,12 +130,10 @@ class ProfileController extends Controller
             'img_path' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $user = Auth::user();
-
         // 新しい画像を保存
         $path = $request->file('img_path')->store('profile_images', 'public');
         $user->img_path = $path;
         $user->save();
-
         return redirect()->back()->with('status', 'image-updated');
     }
 
@@ -174,8 +173,6 @@ class ProfileController extends Controller
 
         return view('profile.follower', compact('followers'));
     }
-
-   
     
     // 他ユーザーの情報を取得し、表示する
     public function show($userId)

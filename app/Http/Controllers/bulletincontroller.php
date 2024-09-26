@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\report;
 use App\Models\tags;
 use App\Models\report_tag;
+use App\Models\tag;
 
 class bulletincontroller extends Controller
 {
@@ -20,7 +21,7 @@ class bulletincontroller extends Controller
     public function bulletin(Request $request)
     {
         // カテゴリーの一覧取得
-        $categorys = tags::where('delete_flag', 0)->get();
+        $categorys = tag::where('delete_flag', 0)->get();
 
         return view('auth.bulletin', ['categorys' => $categorys]);
     }

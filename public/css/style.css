@@ -1,16 +1,16 @@
 
-
 .icon {
     width: 90px;
-    margin-left: 5%;
-    margin-top: 1%;
+    margin-left: 3%;
+    margin-top: 0%;
 }
 
 .flex {
     display: flex;
-    margin-bottom: 0;
+    margin-bottom: 3px;
     width: 100%;
     justify-content: center;
+
 }
 
 .flex2::after,
@@ -23,14 +23,15 @@
     /* 線の色 */
     margin: 0 2em;
     /* 文字と線の余白 */
-    margin-top: 5%;
+    margin-top: 4%;
 }
 
 .post-container {
     width: 100%;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-top: 0;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
 .input_title {
@@ -42,7 +43,7 @@
     justify-content: flex-start;
     width: 80%;
     margin: 0 auto;
-    margin-top: 3%;
+    margin-top: 2%;
     margin-bottom: 1%;
 }
 
@@ -63,10 +64,6 @@
     border-radius: 50%;
 }
 
-h1 {
-    margin: 0;
-    padding: 3% 0 0 5%;
-}
 
 .profile-info {
     text-align: left;
@@ -82,7 +79,7 @@ h1 {
 .post-text {
     width: 75%;
     margin: 0 auto;
-    height: 180px;
+    height: 165px;
     border: 1px solid black;
     border-radius: 10px;
     display: block;
@@ -164,7 +161,8 @@ textarea {
     justify-content: space-between;
     width: 30%;
     margin: 0 auto;
-    padding-top: 0;
+    padding-top: 10px;
+
 }
 
 .back-button,
@@ -203,7 +201,8 @@ textarea {
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
-    padding: 2%;
+    padding: 1%;
+    padding-bottom: 0;
 }
 
 @import 'https://fonts.googleapis.com/css?family=Comfortaa:300,400,700&subset=cyrillic,cyrillic-ext,latin-ext';
@@ -214,7 +213,9 @@ h1 {
     font-family: comfortaa;
     font-weight: 900;
     font-size: 3em;
-    text-shadow: 0em 0.05em 0 rgba(0, 0, 0, 0.35)
+    text-shadow: 0em 0.05em 0 rgba(0, 0, 0, 0.35);
+    margin: 0;
+    padding: 1% 0 0 5%;
 }
 
 .button {
