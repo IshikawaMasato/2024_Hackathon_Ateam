@@ -26,7 +26,7 @@
 
 @foreach($items as $item)
 <div class="item">
-<p>アカウント名</p>
+<p>{{ $item->user->name }}</p>
 <p class="data">{{$item -> created_at}}</p>
 
 </div>
