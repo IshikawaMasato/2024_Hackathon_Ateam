@@ -11,6 +11,8 @@ use App\Models\follows;
 use App\Models\reactions;
 use App\Models\comments;
 use App\Models\report_tag;
+use App\Models\User;
+use App\Models\userTofollow;
 
 class viewpostcontroller extends Controller
 {
@@ -71,15 +73,12 @@ class viewpostcontroller extends Controller
         $user_id = Auth::id();
         //フォローするユーザーが存在するか確認
         $userTofollow = User::find($id);
-        if(!userTofollow){
-            return redirect()->with('error','ユーザーが見つかりません。');
+        if(!$userTofollow){
+            return redirect()->back()->with('error','ユーザーが見つかりません。');
         }
         //すでにフォロー関係が存在するか確認
-        $existingfollow = follows::where('follower_id',$user_id)->first();
+        $existingfollow = follows::where('follower_id',$user_id)->where('followed_id',$id)->first();
 
-        //$user_idと$idでデータが存在するか確認
-       
-        //あればリダイレクト
         //なければ↓の処理
         $follows = follows::create([
             'follower_id'=>$id,
@@ -92,10 +91,15 @@ class viewpostcontroller extends Controller
     public function delete_follow($id)
     {
         $user_id = Auth::id();
+        //フォロー関係を確認
         $follows = follows::where([
-        'follower_id'=>$id,
-        'followed_id'=>$user_id
+        'follower_id'=>$user_id,
+        'followed_id'=>$id
         ]);
+        if($follows) {
+            //  フォロー関係を物理的に削除
+            $follows->delete();
+        }
         $follows->update(['delete_flag' => 1]);
         return redirect('viewpost');
     }
