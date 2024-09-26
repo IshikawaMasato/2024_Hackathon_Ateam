@@ -9,6 +9,7 @@ use App\Http\Controllers\mypagecontroller;
 use App\Http\Controllers\bulletincontroller;
 use App\Http\Controllers\editbulletincontroller;
 use App\Http\Controllers\viewpostcontroller;
+use App\Http\Controllers\viewlistcontroller;
 use App\Http\Controllers\PostController;
 
 //最初のアクセス
@@ -17,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
+Route::get('/viewlist', [viewlistcontroller::class, 'viewlist']);
 
 Route::get('/search', [viewpostController::class, 'search']);
 Route::post('/viewpost', [viewpostController::class, 'viewpost']);

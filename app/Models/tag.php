@@ -11,6 +11,6 @@ class tag extends Model
 
     public function report()
     {
-        return $this->belongsToMany(report::class,'report_tags','report_id','tag_id');
+        return $this->belongsToMany(report::class,'report_tag','report_id','tag_id');
     }
 }

@@ -7,14 +7,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\report;
 use App\Models\tag;
-use App\Models\follows;
-use App\Models\reactions;
-use App\Models\comments;
 use App\Models\report_tag;
 
-class viewpostcontroller extends Controller
+class viewlistcontroller extends Controller
 {
-    public function viewpost()
+    public function viewlist()
     {
         // カテゴリーの一覧取得
         $categorys = tag::where('delete_flag',0)->get();
@@ -65,58 +62,7 @@ class viewpostcontroller extends Controller
         $reports->update(['delete_flag' => 1]);
         return redirect('viewpost');
     }
-    
-    public function follow($id)
-    {
-        $user_id = Auth::id();
-        $follows = follows::create([
-            'follower_id'=>$id,
-            'followed_id'=>$user_id
-        ]);
-        return redirect('viewpost');
-    }
-    
-    public function delete_follow($id)
-    {
-        $user_id = Auth::id();
-        $follows = follows::where([
-        'follower_id'=>$id,
-        'followed_id'=>$user_id
-        ]);
-        $follows->update(['delete_flag' => 1]);
-        return redirect('viewpost');
-    }
 
-    public function reactions($id)
-    {
-        $user_id = Auth::id();
-        $reactions = reactions::create([
-            'user_id'=>$id,
-            'report_id'=>$user_id,
-            'reaction_flag'=> 0
-        ]);
-        return redirect('viewpost');
-    }
-    
-    public function delete_reactions($id)
-    {
-        $user_id = Auth::id();
-        $reactions = reactions::where([
-        'user_id'=>$id,
-        'report_id'=>$user_id
-        ]);
-        $reactions->update(['reaction_flag' => 1]);
-        return redirect('viewpost');
-    }
-
-    public function comments()
-    {
-        // カテゴリーの一覧取得
-        $categorys = tag::where('delete_flag',0)->get();
-        $items = report::where('delete_flag',0)->get();
-
-        return view('viewpost',['items'=>$items,'categorys'=>$categorys]);
-    }
 }
 
 
