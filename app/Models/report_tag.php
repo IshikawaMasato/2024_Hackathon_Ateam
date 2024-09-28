@@ -9,10 +9,14 @@ class report_tag extends Model
 {
     use HasFactory;
     protected $table = 'report_tag';
-    protected $fillable = ['report_id', 'tag_id'];
+    public $incrementing = false; // 自動インクリメントではない
+    protected $keyType = 'array';  // 複合主キーを使用
 
-    public function report()
+    protected $fillable = ['report_id', 'tag_id', 'delete_flag'];
+
+    // テーブルの主キーを指定するメソッド
+    public function getKey()
     {
-        return $this->belongsTo(report::class);
+        return [$this->report_id, $this->tag_id];
     }
 }

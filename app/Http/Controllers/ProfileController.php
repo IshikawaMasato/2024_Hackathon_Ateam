@@ -9,7 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\tags;
+use App\Models\report_tag;
 use Illuminate\View\View;
 
 use App\Models\Post; // Postモデルをインポート
@@ -47,44 +47,28 @@ class ProfileController extends Controller
             'follows' => $follows, // フォローしているデータをビューに渡す
         ]);
     }
+
     public function editbulletin($id)
     {
         // カテゴリーの一覧取得
         $categorys = tag::where('delete_flag', 0)->get();
-        $posts = report::where("id",$id)->get();
-        $users = User::where("id",$id)->get();
-        return view('auth.editbulletin', ["posts"=>$posts,"users"=>$users,'categorys' => $categorys]);
+        // 編集対象のレポートを取得
+        $post = report::findOrFail($id);
+        
+        return view('auth.editbulletin', ["post" => $post, "categorys" => $categorys]);
     }
 
-    
+    public function update(Request $request, $id)
+{
+    $report = Report::find($id);
+    $report->title = $request->input('title');
+    $report->report = $request->input('report');
+    // categoryフィールドの更新を行わない
+    $report->save();
 
-    public function update(Request $request)
-    {
-        $user = Auth::user();
+    return redirect()->back();
+}
 
-        // バリデーション
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'img_path' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // 画像のバリデーション
-        ]);
-
-        // 画像がアップロードされた場合
-        if ($request->hasFile('img_path')) {
-            // 画像の保存
-            $path = $request->file('img_path')->store('profiles', 'public');
-            $user->img_path = $path;
-        }
-
-        // 他のアカウント情報の更新
-        $user->name = $request->name;
-        $user->email = $request->email;
-
-        // 保存
-        $user->save();
-
-        return redirect()->route('profile.edit')->with('status', 'profile-updated');
-    }
 
 
     public function destroy(Request $request): RedirectResponse

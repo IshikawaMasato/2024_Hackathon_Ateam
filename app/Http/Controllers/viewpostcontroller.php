@@ -13,6 +13,7 @@ use App\Models\comments;
 use App\Models\report_tag;
 use App\Models\User;
 use App\Models\userTofollow;
+use Illuminate\Support\Facades\Http;
 
 class viewpostcontroller extends Controller
 {
@@ -22,7 +23,11 @@ class viewpostcontroller extends Controller
         $categorys = tag::where('delete_flag',0)->get();
         $items = report::with('tag')->where('delete_flag',0)->get();
 
-        return view('viewpost',['items'=>$items,'categorys'=>$categorys]);
+        // APIからデータを取得
+        $response = Http::get('https://www.jma.go.jp/bosai/forecast/data/overview_forecast/030000.json');
+        $data = $response->json();
+        
+        return view('viewpost',['items'=>$items,'categorys'=>$categorys,'data'=>$data]);
     }
 
     public function search(Request $request)
@@ -43,19 +48,19 @@ class viewpostcontroller extends Controller
         }
         
         // カテゴリが選択されていたら検索文に含める
-        if($request->tag!=0){
-            //カテゴリが選択されていたら検索
-            $query = report_tag::where('tag_id',$request->tag);
-            
+        if($request->tag != 0){
+            $query->whereHas('tag', function($q) use ($request) {
+                $q->where('tag_id', $request->tag);
+            });
         }
 
         // 作成日が入力されていたら検索文に含める
         if($request->created_at){
-            $query->where('created_at',$request->created_at);
+            $query->whereDate('created_at',$request->created_at);
         }
 
         // 検索文をもとにデータの取得
-        $items=$query->get();
+        $items = $query->with('tag')->get();
         
         //一覧画面へ
         return view('viewpost',['items'=>$items,'categorys'=>$categorys]);

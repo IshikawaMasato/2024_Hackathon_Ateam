@@ -26,4 +26,9 @@ class report extends Model
     {
         return $this->belongsToMany(tag::class,'report_tag','report_id','tag_id');
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
