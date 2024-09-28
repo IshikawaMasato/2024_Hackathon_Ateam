@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\reports;
+use App\Models\report;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,7 +12,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         // 投稿を削除
-        $posts = reports::find($id);
+        $posts = report::find($id);
         $posts->update(['delete_flag' =>1]);
 
         // 削除後、リダイレクトしてメッセージを表示

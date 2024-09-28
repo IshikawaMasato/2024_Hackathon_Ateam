@@ -1,3 +1,5 @@
+@extends('layouts.welcome-layout')
+@section('content')
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -45,7 +47,7 @@
                 </div>
             </div>
             <div class="button-section">
-                <button class="back-button button">戻る</button>
+                <a href="{{ route('viewpost') }}" class="home-button button">戻る</a>
                 <button class="submit-button button">投稿</button>
             </div>
     </div>
@@ -54,3 +56,4 @@
 </body>
 
 </html>
+@endsection
