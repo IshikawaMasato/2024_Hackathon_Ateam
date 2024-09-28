@@ -46,7 +46,7 @@ class viewlistcontroller extends Controller
 
         // 作成日が入力されていたら検索文に含める
         if($request->created_at){
-            $query->where('created_at',$request->created_at);
+            $query->whereDate('created_at',$request->created_at);
         }
 
         // 検索文をもとにデータの取得
