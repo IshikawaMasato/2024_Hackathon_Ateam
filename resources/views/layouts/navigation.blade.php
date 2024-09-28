@@ -6,7 +6,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="no-underline border-none text-[2rem] font-medium hover:no-underline">
+                    <x-nav-link :href="route('viewpost')" :active="request()->routeIs('dashboard')" class="no-underline border-none text-[2rem] font-medium hover:no-underline">
                         {{ __('防災掲示板') }}
                     </x-nav-link>
                 </div>

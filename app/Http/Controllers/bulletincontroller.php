@@ -64,6 +64,6 @@ class bulletincontroller extends Controller
             'tag_id' => $tag,
         ]);
 
-        return redirect('/');
+        return redirect()->route('viewpost');
     }
 }

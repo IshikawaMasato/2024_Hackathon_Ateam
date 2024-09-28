@@ -14,10 +14,7 @@ use App\Http\Controllers\PostController;
 
 //最初の画面をviewlistに変更
 Route::get('/', [viewlistcontroller::class, 'viewlist']);
-
-Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
-
-Route::get('/search', [viewpostController::class, 'search']);
+Route::get('/search', [viewlistcontroller::class, 'search']);
 
 
 Route::get('/dashboard', function () {
@@ -50,8 +47,6 @@ Route::middleware('auth')->group(function () {
     // 他ユーザーの表示
     Route::get('/profile/{userId}', [ProfileController::class, 'show'])->name('profile.otherUser');
 
-    Route::post('/viewpost', [viewpostController::class, 'viewpost']);
-
     Route::get('/delete/{id}', [viewpostController::class, 'delete'])->name('delete');
     Route::get('/follow/{id}', [viewpostController::class, 'follow'])->name('follow');
     Route::get('/delete_follow/{id}', [viewpostController::class, 'delete_follow'])->name('delete_follow');
@@ -67,7 +62,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/mypage', [mypagecontroller::class, 'mypage']);
     Route::get('/editpost', [editpostcontroller::class, 'editpost']);
-    Route::get('/viewpost', [viewpostcontroller::class, 'viewpost']);
+    Route::get('/viewpost', [ViewpostController::class, 'viewpost'])->name('viewpost');
 
 });
 
